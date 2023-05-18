@@ -1,0 +1,364 @@
+[<section class="contents">
+<hgroup class="title type-00">
+<h1 id="titleValue">상장법인목록</h1>
+</hgroup>
+<form id="searchForm" method="post" name="searchForm" onsubmit="return false;">
+<input id="method" name="method" type="hidden" value=""/>
+<input id="pageIndex" name="pageIndex" type="hidden" value="1"/>
+<input id="currentPageSize" name="currentPageSize" type="hidden" value="15"/>
+<input id="comAbbrv" name="comAbbrv" type="hidden" value=""/>
+<input id="beginIndex" name="beginIndex" type="hidden" value=""/>
+<input id="orderMode" name="orderMode" type="hidden" value=""/>
+<input id="orderStat" name="orderStat" type="hidden" value=""/>
+<input id="isurCd" name="isurCd" type="hidden" value=""/><!-- 발행기관코드 -->
+<input id="repIsuSrtCd" name="repIsuSrtCd" type="hidden" value=""/><!-- 대표종목단축코드 -->
+<input id="searchCodeType" name="searchCodeType" type="hidden" value=""/> <!--number:종목코드 char:종목명-->
+<section class="search-group type-00">
+<div class="wrapper">
+<div class="form-search type-00 type-multi">
+<table summary="시장구분,회사명,업종,결산월,검색유형,지역">
+<caption>조회</caption>
+<colgroup>
+<col width="80"/>
+<col width="44%"/>
+<col width="70"/>
+<col width="*"/>
+</colgroup>
+<tbody>
+<tr class="first">
+<th scope="row"><label for="rAll">시장구분</label></th>
+<td>
+<input checked="checked" class="rad-00" id="rAll" name="marketType" title="전체" type="radio" value=""/> <label for="rAll">전체</label>
+<input class="rad-00" id="rWertpapier" name="marketType" title="유가증권" type="radio" value="stockMkt"/> <label for="rWertpapier">유가증권</label>
+<input class="rad-00" id="rKosdaq" name="marketType" title="코스닥" type="radio" value="kosdaqMkt"/> <label for="rKosdaq">코스닥</label>
+<input class="rad-00" id="rKonex" name="marketType" title="코넥스" type="radio" value="konexMkt"/> <label for="rKonex">코넥스</label>
+</td>
+<th scope="row"><label for="select_2_0">검색유형</label></th>
+<td>
+<select class="middle" id="searchType" name="searchType" style="width:235px;">
+<option selected="selected" value="13">상장법인</option>
+<option value="01">관리종목</option>
+<option value="05">불성실공시법인</option>
+<option value="07">자산2조법인</option>
+<option value="99">외국법인</option>
+<option value="191">코스닥 글로벌 세그먼트</option>
+<option value="QGG03P">(코스닥) 우량기업부</option>
+<option value="QGG04P">(코스닥) 벤처기업부</option>
+<option value="QGG05P">(코스닥) 중견기업부</option>
+<option value="QGG06P">(코스닥) 기술성장기업부</option>
+<option value="15">KTOP30</option>
+<option value="06">KOSPI200</option>
+<option value="16">KOSDAQ150</option>
+<option value="17">KRX300</option>
+</select>
+</td>
+</tr>
+<tr>
+<th scope="row"><label for="select_1_0">업종</label></th>
+<td>
+<select class="middle" id="industry" name="industry" style="width:290px;">
+<option value="">전체</option>
+<option value="01">농업, 임업 및 어업</option>
+<option value="02">광업</option>
+<option value="03">제조업</option>
+<option value="0310"> - 식료품 제조업</option>
+<option value="0311"> - 음료 제조업</option>
+<option value="0312"> - 담배 제조업</option>
+<option value="0313"> - 섬유제품 제조업; 의복제외</option>
+<option value="0314"> - 의복, 의복액세서리 및 모피제품 제조업</option>
+<option value="0315"> - 가죽, 가방 및 신발 제조업</option>
+<option value="0316"> - 목재 및 나무제품 제조업;가구제외</option>
+<option value="0317"> - 펄프, 종이 및 종이제품 제조업</option>
+<option value="0318"> - 인쇄 및 기록매체 복제업</option>
+<option value="0319"> - 코크스, 연탄 및 석유정제품 제조업</option>
+<option value="0320"> - 화학물질 및 화학제품 제조업;의약품 제외</option>
+<option value="0321"> - 의료용 물질 및 의약품 제조업</option>
+<option value="0322"> - 고무 및 플라스틱제품 제조업</option>
+<option value="0323"> - 비금속 광물제품 제조업</option>
+<option value="0324"> - 1차 금속 제조업</option>
+<option value="0325"> - 금속가공제품 제조업;기계 및 가구 제외</option>
+<option value="0326"> - 전자부품, 컴퓨터, 영상, 음향 및 통신장비 제조업</option>
+<option value="0327"> - 의료, 정밀, 광학기기 및 시계 제조업</option>
+<option value="0328"> - 전기장비 제조업</option>
+<option value="0329"> - 기타 기계 및 장비 제조업</option>
+<option value="0330"> - 자동차 및 트레일러 제조업</option>
+<option value="0331"> - 기타 운송장비 제조업</option>
+<option value="0332"> - 가구 제조업</option>
+<option value="0333"> - 기타 제품 제조업</option>
+<option value="0334"> - 산업용 기계 및 장비 수리업</option>
+<option value="04">전기, 가스, 증기 및 공기조절 공급업</option>
+<option value="05">수도, 하수 및 폐기물 처리, 원료 재생업</option>
+<option value="06">건설업</option>
+<option value="07">도매 및 소매업</option>
+<option value="08">운수 및 창고업</option>
+<option value="09">숙박 및 음식점업</option>
+<option value="10">정보통신업</option>
+<option value="11">금융 및 보험업</option>
+<option value="12">부동산업</option>
+<option value="13">전문, 과학 및 기술 서비스업</option>
+<option value="14">사업시설 관리, 사업지원 및 임대 서비스업</option>
+<option value="15">공공행정, 국방 및 사회보장 행정</option>
+<option value="16">교육 서비스업</option>
+<option value="17">보건업 및 사회복지 서비스업</option>
+<option value="18">예술, 스포츠 및 여가관련 서비스업 </option>
+<option value="19">협회 및 단체, 수리 및 기타 개인 서비스업</option>
+<option value="20">가구 내 고용활동 및 달리 분류되지 않은 자가소비 생산활동</option>
+<option value="21">국제 및 외국기관</option>
+</select>
+</td>
+<th scope="row"><label for="select_1_1">결산월</label></th>
+<td>
+<select class="middle" id="fiscalYearEnd" name="fiscalYearEnd" style="width:235px;">
+<option value="all">전체</option>
+<option value="01">01월</option>
+<option value="02">02월</option>
+<option value="03">03월</option>
+<option value="04">04월</option>
+<option value="05">05월</option>
+<option value="06">06월</option>
+<option value="07">07월</option>
+<option value="08">08월</option>
+<option value="09">09월</option>
+<option value="10">10월</option>
+<option value="11">11월</option>
+<option value="12">12월</option>
+</select>
+</td>
+</tr>
+<tr>
+<th scope="row"><label for="AKCKwd">회사명</label></th>
+<td>
+<section class="auto_complete company">
+<div class="autoKey">
+<input autocomplete="off" class="txt middle" id="AKCKwd" name="comAbbrvTmp" onblur="chkValidChar(this);" type="text"/>
+<div class="tselect">
+<img alt="자동완성 열기" class="autoc_open" id="AKCArrow" src="../images/common/icn_autoc_open.gif"/>
+<div class="AKCDiv" id="AKCDiv" style="display:none;">
+<iframe frameborder="0" id="AKCIfrm" name="AKCIfrm" scrolling="no" src="../common/akc.html" style="height: 130px;" title="자동완성"></iframe>
+</div>
+</div>
+</div>
+<a class="btn-sprite type-01 vmiddle btn-company" href="#searchComp" onclick="fnFindCorpName2(); return false;" title="회사명 찾기"><span>찾기</span></a>
+<div class="clear"></div>
+</section>
+</td>
+<th scope="row"><label for="select_2_1">지역</label></th>
+<td>
+<select class="middle" id="location" name="location" style="width:235px;">
+<option value="all">전체</option>
+<option value="01">강원도</option>
+<option value="02">경기도</option>
+<option value="03">경상남도</option>
+<option value="04">경상북도</option>
+<option value="05">광주광역시</option>
+<option value="06">대구광역시</option>
+<option value="07">대전광역시</option>
+<option value="08">부산광역시</option>
+<option value="09">서울특별시</option>
+<option value="10">세종특별자치시</option>
+<option value="11">울산광역시</option>
+<option value="12">인천광역시</option>
+<option value="13">전라남도</option>
+<option value="14">전라북도</option>
+<option value="15">제주특별자치도</option>
+<option value="16">충청남도</option>
+<option value="17">충청북도</option>
+<option value="18">외국법인</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+<ul class="btn-set char-group type-han">
+<li><a class="ord-00" href="#" id="btnType" onclick="fnBtnType('A', '0'); return false;" title="ㄱ"><span>ㄱ</span></a></li>
+<li><a class="ord-01" href="#" id="btnType" onclick="fnBtnType('B', '1'); return false;" title="ㄴ"><span>ㄴ</span></a></li>
+<li><a class="ord-02" href="#" id="btnType" onclick="fnBtnType('C', '2'); return false;" title="ㄷ"><span>ㄷ</span></a></li>
+<li><a class="ord-03" href="#" id="btnType" onclick="fnBtnType('D', '3'); return false;" title="ㄹ"><span>ㄹ</span></a></li>
+<li><a class="ord-04" href="#" id="btnType" onclick="fnBtnType('E', '4'); return false;" title="ㅁ"><span>ㅁ</span></a></li>
+<li><a class="ord-05" href="#" id="btnType" onclick="fnBtnType('F', '5'); return false;" title="ㅂ"><span>ㅂ</span></a></li>
+<li><a class="ord-06" href="#" id="btnType" onclick="fnBtnType('G', '6'); return false;" title="ㅅ"><span>ㅅ</span></a></li>
+<li><a class="ord-07" href="#" id="btnType" onclick="fnBtnType('H', '7'); return false;" title="ㅇ"><span>ㅇ</span></a></li>
+<li><a class="ord-08" href="#" id="btnType" onclick="fnBtnType('I', '8'); return false;" title="ㅈ"><span>ㅈ</span></a></li>
+<li><a class="ord-09" href="#" id="btnType" onclick="fnBtnType('J', '9'); return false;" title="ㅊ"><span>ㅊ</span></a></li>
+<li><a class="ord-10" href="#" id="btnType" onclick="fnBtnType('K', '10'); return false;" title="ㅋ"><span>ㅋ</span></a></li>
+<li><a class="ord-11" href="#" id="btnType" onclick="fnBtnType('L', '11'); return false;" title="ㅌ"><span>ㅌ</span></a></li>
+<li><a class="ord-12" href="#" id="btnType" onclick="fnBtnType('M', '12'); return false;" title="ㅍ"><span>ㅍ</span></a></li>
+<li><a class="ord-13" href="#" id="btnType" onclick="fnBtnType('N', '13'); return false;" title="ㅎ"><span>ㅎ</span></a></li>
+<li><a class="ord-14" href="#" id="btnType" onclick="fnBtnType('AZ', '14'); return false;" title="A-Z"><span>A-Z</span></a></li>
+<li><a class="ord-15" href="#" id="btnType" onclick="fnBtnType('ETC', '15'); return false;" title="기타"><span>기타</span></a></li>
+</ul>
+</div>
+<div class="clear"></div>
+<div class="btn-group type-bt">
+<a class="btn-sprite type-00 vmiddle search-btn" href="#" onclick="fnSearchWithoutIndex(); return false;" title="검색"><span>검색</span></a>
+<a class="btn-sprite type-00 vmiddle xls-btn" href="#" onclick="fnDownload(); return false;" title="EXCEL"><span>EXCEL</span></a>
+</div>
+</div>
+</section>
+</form>
+<article class="pcontents" id="main-contents">
+</article>
+<script type="text/JavaScript">
+document.onkeypress = function(e){
+	var result = "";
+	if(typeof(e)!='undefined'){
+		result = e.which;
+	}else{
+		result = event.keyCode;
+	}
+	keyEvent(result);
+}
+
+function keyEvent(e){
+	if(document.all){//IE
+		if(window.event.keyCode==13){
+			fnSearchWithoutIndex();
+		}
+	}else{
+		if(e==13){
+			fnSearchWithoutIndex();
+		}
+	}
+}
+
+
+$(document).ready(function(){
+	fnInit();
+});
+
+
+function fnInit(){
+	fnOrder("3", "D");
+}
+/*
+*
+*법인명, 종목코드, 일자, 적용구분의 order by 조건
+*/
+function fnOrder(mode, stat){
+	$("#searchForm > #orderMode").val(mode);
+	$("#searchForm > #orderStat").val(stat);
+	$("#searchForm > #pageIndex").val("1");
+
+	fnSearch();
+}
+
+function fnSearch1() {
+	$("#searchForm > #pageIndex").val("1");
+	$("#searchForm > #currentPageSize").val($(document).find("select[id=currentPageSize]").val());
+	fnSearch();
+}
+
+function fnSearchWithoutIndex(){
+	$("#searchForm > #beginIndex").val("");
+	fnClearBtnType();
+	fnInit();
+}
+
+function fnClearBtnType(){
+	$(document).find("a[id=btnType]").each(function(){
+		if($(this).hasClass("active")) {
+			$(this).removeClass("active");
+		}	
+	});
+}
+
+function fnSetCorpName(str){
+	$("#searchForm > #comAbbrv").val(encodeURI(str));
+}
+
+function fnClearCorpName(){
+	$("#searchForm > #comAbbrv").val("");
+	$("#searchForm").find("input:text[name=comAbbrvTmp]").val("");
+}
+
+function fnSearch(){
+    fnSetCorpName($("#searchForm").find("input:text[name=comAbbrvTmp]").val());
+	
+    if($(document).find("select[id=currentPageSize]").val() != undefined) {
+    	$("#searchForm > #currentPageSize").val($(document).find("select[id=currentPageSize]").val());
+    }
+	$("#searchForm > #method").val("searchCorpList");
+	$("#searchForm").ajaxSubmit({
+		  ajaxUrl : '/corpgeneral/corpList.do'
+		, ajaxCallBack: fnSearchCallBack
+	});
+}
+
+function fnSearchCallBack(data){
+	$("#main-contents").empty().append(data);
+	$("tr:odd").addClass("active");
+	
+	fnLegendTooltip();
+}
+
+function fnDownload(){
+	$("#searchForm").attr('onsubmit', '');
+	$("#searchForm > #currentPageSize").val("3000");
+	$("#searchForm > #pageIndex").val("1");	
+	$("#searchForm > #method").val("download");
+	$("#searchForm").attr('action', '/corpgeneral/corpList.do').submit();
+	$("#searchForm").attr('onsubmit', 'return false;');
+}
+
+/** 법인명찾기 팝업의 자바스크립트에서 호출하는 Callback 함수 */
+function setCorpInfo(isurCd, kisComCd, repIsuSrtCd, comNm, comAbbrv, isurSymbl, fssUnqNo){
+
+    var  str = "";
+            str += "isurCd : " + isurCd + "\n";
+            str += "kisComCd : " + kisComCd + "\n";
+            str += "repIsuSrtCd : " + repIsuSrtCd + "\n";
+            str += "comNm : " + comNm + "\n";
+            str += "comAbbrv : " + comAbbrv + "\n";
+            str += "isurSymbl : " + isurSymbl + "\n";
+            str += "fssUnqNo : " + fssUnqNo + "\n";
+    //alert(str);
+
+    $("#searchForm").find("input:text[name=comAbbrvTmp]").val(comAbbrv);	//법인명
+    $("#searchForm > #repIsuSrtCd").val("A"+repIsuSrtCd);					//법인코드
+    $("#searchForm > #searchCodeType").val("char");							//법인코드
+}
+
+function fnBtnType(type, idx){
+
+	fnClearBtnType();
+	fnClearCorpName();
+	
+	$("#searchForm > #pageIndex").val("1");
+	$("#searchForm > #isurCd").val("");
+	$("#searchForm > #repIsuSrtCd").val("");
+	$("#searchForm > #beginIndex").val(type);
+	
+	$(document).find("a[id=btnType]").each(function(index){
+		if(idx == index) {
+			if(!$(this).hasClass("active")) {
+				$(this).addClass("active");
+			}
+		}
+	});
+	
+	fnInit();
+}
+
+</script>
+</section>, <aside class="contents">
+<h3><span class="">상장법인상세정보</span></h3>
+<ul>
+<li><a class="" href="/corpdetail/totalinfo.do?method=loadInitPage">종합정보</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/listedIssueStatus.do?method=loadInitPage">상장종목현황</a><div class="dash"></div></li>
+<li><a class="active" href="/corpgeneral/corpList.do?method=loadInitPage">상장법인목록</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/stockissuelist.do?method=loadInitPage">주식발행내역</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/companyGovernance.do?method=loadInitPage">기업지배구조</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/treasurystk.do?method=loadInitPage">자사주취득/처분</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/irschedule.do?method=searchIRScheduleMain&amp;gubun=iRScheduleCalendar">IR일정/IR자료실</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/companyAnalysisReport.do?method=listingForeignCompanyMain&amp;searchGubun=companyAnalysisReport">기업분석보고서</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/corpGroup.do?method=loadInitPage">기업집단</a><div class="dash"></div></li>
+<li><a class="" href="/disclosureinfo/dividendinfo.do?method=searchDividendInfoMain">배당정보</a><div class="dash"></div></li>
+<li><a class="" href="/compfinance/financialinfo.do?method=loadInitPage&amp;searchgubun=corporation">회사재무비교</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/excntDisclsCompany.do?method=loadInitPage">공시우수법인</a><div class="dash"></div></li>
+<li><a class="" href="/corpdetail/ventureFundInvest.do?method=corpListMain">벤처펀드투자기업(코)</a><div class="dash"></div></li>
+</ul>
+<form name="menuUrlFrm">
+<input name="menuUrl" type="hidden" value="/corpgeneral/corpList.do?method=loadInitPage"/>
+</form>
+</aside>]
+bs4.element.ResultSet

@@ -1,0 +1,227 @@
+<tbody>
+			
+				
+					
+			<tr class="first">
+				<td class="first" title="주식회사 에스바이오메딕스"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('30436'); return false;" title="에스바이오메딕스"> 에스바이오메딕스</a> </td>
+				<td class="textOverflow" title="의약품 제조업">의약품 제조업</td>
+				<td class="textOverflow" title="줄기세포 치료제 연구 및 개발">줄기세포 치료제 연구 및 개발</td>
+				<td class="txc">2023-05-04</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="강세일">강세일</td>
+				<td class="txc">
+					
+						<a href="http://www.sbiomedics.com/" class="btn ico homepage" target="_blank" title="http://www.sbiomedics.com/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr class="active">
+				<td class="first" title="슈어소프트테크 주식회사"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('29883'); return false;" title="슈어소프트테크"> 슈어소프트테크</a> </td>
+				<td class="textOverflow" title="소프트웨어 개발 및 공급업">소프트웨어 개발 및 공급업</td>
+				<td class="textOverflow" title="소프트웨어 자동화 검증 플랫폼">소프트웨어 자동화 검증 플랫폼</td>
+				<td class="txc">2023-04-28</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="배현섭">배현섭</td>
+				<td class="txc">
+					
+						<a href="http://www.suresofttech.com/" class="btn ico homepage" target="_blank" title="http://www.suresofttech.com/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">경기도</td>
+			</tr>
+					
+			<tr>
+				<td class="first" title="(주)토마토시스템"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('39321'); return false;" title="토마토시스템"> 토마토시스템</a> </td>
+				<td class="textOverflow" title="소프트웨어 개발 및 공급업">소프트웨어 개발 및 공급업</td>
+				<td class="textOverflow" title="UI/UX솔루션, 대학정보화사업 SW">UI/UX솔루션, 대학정보화사업 SW</td>
+				<td class="txc">2023-04-27</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="이상돈">이상돈</td>
+				<td class="txc">
+					
+						<a href="http://tomatosystem.co.kr/" class="btn ico homepage" target="_blank" title="http://tomatosystem.co.kr/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr class="active">
+				<td class="first" title="(주)마이크로투나노"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('42498'); return false;" title="마이크로투나노"> 마이크로투나노</a> </td>
+				<td class="textOverflow" title="반도체 제조업">반도체 제조업</td>
+				<td class="textOverflow" title="메모리 테스트용 프로브 카드">메모리 테스트용 프로브 카드</td>
+				<td class="txc">2023-04-26</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="황규호">황규호</td>
+				<td class="txc">
+					
+						<a href="http://micro2nano.com" class="btn ico homepage" target="_blank" title="http://micro2nano.com"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">경기도</td>
+			</tr>
+					
+			<tr>
+				<td class="first" title="주식회사 셀바이오휴먼텍"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('31816'); return false;" title="셀바이오휴먼텍"> 셀바이오휴먼텍</a> </td>
+				<td class="textOverflow" title="기타 섬유제품 제조업">기타 섬유제품 제조업</td>
+				<td class="textOverflow" title="마스크팩 섬유소재(시트)">마스크팩 섬유소재(시트)</td>
+				<td class="txc">2023-04-20</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="이권선">이권선</td>
+				<td class="txc">
+					
+						<a href="http://cellbiohumantech.co.kr/" class="btn ico homepage" target="_blank" title="http://cellbiohumantech.co.kr/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">경기도</td>
+			</tr>
+					
+			<tr class="active">
+				<td class="first" title="에스케이오션플랜트(주)"><img src="/images/common/icn_t_yu.gif" class="vmiddle legend" alt="유가증권"> <a id="companysum" href="#companysum" onclick="companysummary_open('10009'); return false;" title="SK오션플랜트"> SK오션플랜트</a> <img src="/images/common/icn_t_x300.gif" class="vmiddle legend" alt="KRX300"> </td>
+				<td class="textOverflow" title="1차 철강 제조업">1차 철강 제조업</td>
+				<td class="textOverflow" title="해상풍력 하부구조물">해상풍력 하부구조물</td>
+				<td class="txc">2023-04-19</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="이승철">이승철</td>
+				<td class="txc">
+					
+						<a href="http://www.skoceanplant.com/" class="btn ico homepage" target="_blank" title="http://www.skoceanplant.com/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">경상남도</td>
+			</tr>
+					
+			<tr>
+				<td class="first" title="(주)노보믹스"><img src="/images/common/icn_t_konex.gif" class="vmiddle legend" alt="코넥스"> <a id="companysum" href="#companysum" onclick="companysummary_open('28310'); return false;" title="노보믹스"> 노보믹스</a> </td>
+				<td class="textOverflow" title="자연과학 및 공학 연구개발업">자연과학 및 공학 연구개발업</td>
+				<td class="textOverflow" title="위암 예후예측 진단키트">위암 예후예측 진단키트</td>
+				<td class="txc">2023-04-19</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="허용민">허용민</td>
+				<td class="txc">
+					
+						<a href="http://novomics.com/" class="btn ico homepage" target="_blank" title="http://novomics.com/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr class="active">
+				<td class="first" title="삼성에프엔위탁관리부동산투자회사 주식회사"><img src="/images/common/icn_t_yu.gif" class="vmiddle legend" alt="유가증권"> <a id="companysum" href="#companysum" onclick="companysummary_open('44873'); return false;" title="삼성FN리츠"> 삼성FN리츠</a> </td>
+				<td class="textOverflow" title="부동산 임대 및 공급업">부동산 임대 및 공급업</td>
+				<td class="textOverflow" title="대치타워 및 에스원빌딩">대치타워 및 에스원빌딩</td>
+				<td class="txc">2023-04-10</td>
+				<td class="txc">01월</td>
+				<td class="txc" title="윤양수">윤양수</td>
+				<td class="txc">
+					
+						<a href="http://www.samsungfnreit.com/" class="btn ico homepage" target="_blank" title="http://www.samsungfnreit.com/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr>
+				<td class="first" title="주식회사 현대그린푸드"><img src="/images/common/icn_t_yu.gif" class="vmiddle legend" alt="유가증권"> <a id="companysum" href="#companysum" onclick="companysummary_open('45334'); return false;" title="현대그린푸드"> 현대그린푸드</a> <img src="/images/common/icn_t_x300.gif" class="vmiddle legend" alt="KRX300"> </td>
+				<td class="textOverflow" title="종합 소매업">종합 소매업</td>
+				<td class="textOverflow" title="푸드서비스(단체급식), 식자재유통서비스, 공산품/생식품 유통서비스">푸드서비스(단체급식), 식자재유통서비스, 공산품/생식품 유통서비스</td>
+				<td class="txc">2023-04-10</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="박홍진">박홍진</td>
+				<td class="txc">
+					
+						<a href="http://hyundaigreenfood.com" class="btn ico homepage" target="_blank" title="http://hyundaigreenfood.com"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">경기도</td>
+			</tr>
+					
+			<tr class="active">
+				<td class="first" title="미래에셋비전기업인수목적3호 주식회사"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('44883'); return false;" title="미래에셋비전스팩3호"> 미래에셋비전스팩3호</a> </td>
+				<td class="textOverflow" title="금융 지원 서비스업">금융 지원 서비스업</td>
+				<td class="textOverflow" title="기업인수목적회사(기타금융서비스)">기업인수목적회사(기타금융서비스)</td>
+				<td class="txc">2023-04-07</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="권유현">권유현</td>
+				<td class="txc">
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr>
+				<td class="first" title="아이비케이에스제22호기업인수목적 주식회사"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('44876'); return false;" title="IBKS제22호스팩"> IBKS제22호스팩</a> </td>
+				<td class="textOverflow" title="금융 지원 서비스업">금융 지원 서비스업</td>
+				<td class="textOverflow" title="기업인수 및 합병">기업인수 및 합병</td>
+				<td class="txc">2023-04-06</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="김정현">김정현</td>
+				<td class="txc">
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr class="active">
+				<td class="first" title="하나27호기업인수목적 주식회사"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('44837'); return false;" title="하나27호스팩"> 하나27호스팩</a> </td>
+				<td class="textOverflow" title="금융 지원 서비스업">금융 지원 서비스업</td>
+				<td class="textOverflow" title="기업인수합병">기업인수합병</td>
+				<td class="txc">2023-04-06</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="김철우">김철우</td>
+				<td class="txc">
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr>
+				<td class="first" title="한화갤러리아(주)"><img src="/images/common/icn_t_yu.gif" class="vmiddle legend" alt="유가증권"> <a id="companysum" href="#companysum" onclick="companysummary_open('45226'); return false;" title="한화갤러리아"> 한화갤러리아</a> <img src="/images/common/icn_t_x300.gif" class="vmiddle legend" alt="KRX300"> </td>
+				<td class="textOverflow" title="종합 소매업">종합 소매업</td>
+				<td class="textOverflow" title="백화점">백화점</td>
+				<td class="txc">2023-03-31</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="김은수">김은수</td>
+				<td class="txc">
+					
+						<a href="http://www.hanwhagalleria.co.kr" class="btn ico homepage" target="_blank" title="http://www.hanwhagalleria.co.kr"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr class="active">
+				<td class="first" title="(주)지아이이노베이션"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('35857'); return false;" title="지아이이노베이션"> 지아이이노베이션</a> </td>
+				<td class="textOverflow" title="자연과학 및 공학 연구개발업">자연과학 및 공학 연구개발업</td>
+				<td class="textOverflow" title="면역항암제 및 알레르기 치료제">면역항암제 및 알레르기 치료제</td>
+				<td class="txc">2023-03-30</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="이병건, 홍준호">이병건..</td>
+				<td class="txc">
+					
+						<a href="http://www.gi-innovation.com/kr/" class="btn ico homepage" target="_blank" title="http://www.gi-innovation.com/kr/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+			<tr>
+				<td class="first" title="엘비인베스트먼트(주)"><img src="/images/common/icn_t_ko.gif" class="vmiddle legend" alt="코스닥"> <a id="companysum" href="#companysum" onclick="companysummary_open('30996'); return false;" title="LB인베스트먼트"> LB인베스트먼트</a> </td>
+				<td class="textOverflow" title="기타 금융업">기타 금융업</td>
+				<td class="textOverflow" title="중소기업 창업투자">중소기업 창업투자</td>
+				<td class="txc">2023-03-29</td>
+				<td class="txc">12월</td>
+				<td class="txc" title="박기호">박기호</td>
+				<td class="txc">
+					
+						<a href="http://lbinvestment.com/" class="btn ico homepage" target="_blank" title="http://lbinvestment.com/"><span>홈페이지 보기</span></a>
+					
+				</td>
+				<td class="txc">서울특별시</td>
+			</tr>
+					
+				
+				
+			
+		</tbody>

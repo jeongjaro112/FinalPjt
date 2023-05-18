@@ -1,0 +1,470 @@
+URL = 'https://jsonplaceholder.typicode.com/posts'
+response = requests.get(URL)
+import json
+json_result = json.loads(response.text)
+type(response.json())
+
+
+URL = 'https://www.jungle.co.kr'
+
+# 스크롤 했을 때 나오는 추가데이터 ([Network] -> Fetch/XHR 탭에서 나오는 recent.json의 요청 URL)
+JUNGLE_URL = 'https://www.jungle.co.kr/recent.json?magazineOffset={}&contestOffset={}&exhibitOffset={}&galleryOffset={}'.format(
+    0, 0, 0, 0
+)
+
+URL = 'https://www.jungle.co.kr/recent.json'
+params = {
+    'magazineOffset': 0,
+    'contestOffset': 0,
+    'exhibitOffset': 0,
+    'galleryOffset': 0
+}
+
+response = requests.get(URL, params=params)
+response.status_code
+json.dumps({
+    'key': 0,
+    'key2': 3
+})
+import json
+json_result = json.loads(response.text)
+jungle_list = []
+for data in json_result['moreList']:
+    print(data['title']) # 제목
+    print(data['targetCode']) # 카테고리
+    jungle_list.append({
+        '제목': data['title'],
+        '카테고리': data['targetCode']
+    })
+jungle_list
+
+# 마지막 페이지까지 크롤링
+params = {
+    'magazineOffset': 0,
+    'contestOffset': 0,
+    'exhibitOffset': 0,
+    'galleryOffset': 0
+}
+
+jungle_list = []
+for i in range(100):
+    print('현재 파라미터', params)
+    response = requests.get(URL, params=params)
+
+    json_result = json.loads(response.text)
+
+    for data in json_result['moreList']:
+        # print(data['title']) # 제목
+        # print(data['targetCode']) # 카테고리
+        jungle_list.append({
+            '제목': data['title'],
+            '카테고리': data['targetCode']
+        })
+    
+    # next parameter 값
+    for key in params:
+        # print(key, json_result[key])
+        params[key] = json_result[key]
+    # print('다음 파라미터?', params)
+
+    if json_result['existMore'] == False:
+        break
+
+
+
+Hello?
+I'm calling from Korea.
+Is it Sakura Terrace Hotel?
+My name is Kim Jongwoo.
+I made a reservation through Agoda website.
+Agoda site reservation number is 868164036
+Check-in is May 19th and check-out is May 22nd.
+I will stay at your hotel for 3 nights and 4 days.
+Yesterday, I sent an e-mail to your hotel email address about my inquiry.
+I'm calling because I didn't get a reply.
+There are two things I want to ask you.
+The first is the reservation confirmation.
+The second is concierge service.
+The first request.
+Is my accommodation reserved?
+
+And, the last question.
+Can I use your hotel as a delivery agent?
+I bought an on-netz electric therapeutic device 
+online from Mitsui On-netz Corporation. 
+Can I ship it to your hotel? You can give it to me 
+when I arrive at the hotel on May 19th. Is it possible?
+
+
+
+{"sodar_query_id":"k6ZdZLC1L8LTrQSD1o_wCg","injector_basename":"sodar2",
+"bg_hash_basename":"08cn5b8EVMSc5l6e1YWDk0jg24yFrQ2cZ845B_qPECM",
+"bg_binary":"mNS6wl3xl9XKApGKFupweIJdDOX2lya8d+3iH8FIM9thP5KPdwbEaVxWZHiWJFTTy2bKK1HEytKogzQLXzubapC37ZoNhlb49u/EjKqSrpwh11l6i6xUhV/9KqubCZtBJ1ZQpAsF4dSJ7vQ6eIlklSC/TDoS6anW2DmY1i3oZWwBChCvwJhwoiSpc0b/Wkt80VbL/oGC1GuMyZ3IzHzlUjsr9WBMrmwI2d/aY5Ihs9lultWMDCoOR8+zgQwOyeY2X6bIeDo0yE/5Qa/rR+cmsURf5lY7eKY5f8qcWTck6zjjQnQycx0Td0E1v/e2SuCG/7RfiL7QvlOFBMDWPfih0WwOmoYFVBOs6LT+pjaPDW+nd5FYDeA/7EK1S05ZsGPy8ElIYcaNsU3+3jZ12fFJ18NTXrq0V5XfQ+k6FV2zSOM1AU36AInmqpoY7m43MOG+9M+lHJBh7Qbo7Tnmi/MiGBKYzDPx+DywGxG55AxBL7l/BM1cUbEr6OrqaJqoKZnwjVgIE7NUb1HkXAlNfUHOvZc1ye92BvBhcSVcFU6wmGxLn3PzZAZqL6rrqQa1ZjWD+hv/jjPZQul/DvPqpBUDf8EB5+wQGFg4BEvpia748QQqtF4es2n/V0aQpgnm+VRh8h/PKa7gHPvUG13+0tasiKtx69MD9XY3AJpdluVp9yeToMEXC30yJkfmCHVGea7BsUbOEXjG389b3bNM7wRPvxQXc8kXJqU3hB+8BDMRtTe75eAHG9oZpK7El1LS4NziJi9Dm7ZgY8J5g6DTmSQbH+TSv0NaxAtXBo8wStogLxG/coFycBIK7OtI+anVkbW9X9MkX/d/8Bb4DC73yVlLmSBgxOE7ktXdJv956jITvkVvxarlfItZuulNyJosVP7ptXGSzQ+Cb7rTFXdnWM5gI8X16Gc6fo9vyZ27VuiWslBWKY7EWUNRqs1hryeJy3vcnG7q+fQgG58QTNr7zBuEiLf8DveRJnE+AfYXpbnKY1qufqQCGDkWVvEphy3QuGTX8Q8MtH601Vp/o/hCW1PG3vzTpzx4lUokBpLZphVSfauT3mmt525/J+dUofBwDcdVyhT9mkmmtxp/Ec2lOjTCGr9LBU9dIoivLh86Oio7gtCIrrY1NFfWLxmTUhByQ/N277Az/eQ7KpRmEEx589ocGYXuYfC/CnVcolIWQ6ycQKBSlv2QlrcHPWMbfFEizOhe7jpnL+1vaQF8hddmplKdk4d1erQJCTfQRs5zVlgoDLX2yNIaALu7uQPI+Z0dGmnhyjznL+GW+VJYCxsiahuFs8DTw6BA9TuLcEffMcRP/Mz/31Qa/YdHtTgz+nu5YiLZt1lCDw8Ebuh1KgC7ZYLGowT4vO6jkZKSuQKguOtkCn7eW1JaynrHP1X+R/hjy2N3Ceuj+f/8XRCbW3TNAyfwcHqq/nnWXJ1HDJDfK9JQmiznIPC0VaHrMxem/CzWhr+06vh7arQemCM+2XnTpakUqcM1VechZqOYHxU9igYdBFfOvjSiNfqFja//njCKRqZ8ETwKE2MSKe28ldj6l2PJvFG+S3ztgBep5+KA30Blne/e4lFxp1qYcdCD1HkZHA1x5iFJwRaY8vLnrmHIoKi+k1SHQY31iOzoX8G4dyx9qQ/R6+IltLflw14+EWbkVf9ir1E1d6m7llYrv82nsn4oVp+Dhw6ma8UmypDDn983YhTbp8TB8AJRFiQNt0U6317dLH0SVi9IKL7qYG6qiImJy+oFl0CFvQVuGrSuheto60OLt0HSogX5GhjANOUf0B0+nHLs5H3zGpDkMjqdDCeQMS3O2b5bmhpsT7sbV4SOD/MmWRpNH/mDE7hbkWpLrpWgSiycc9AJ9bfHNjbv7ZjKnM2HQkI7fXenCSDSzbzXMAEsAiotx7dHVzkmO7Z6D6BtSCDtxY3L7r+H7z5+G1E7Vie9fH8UlGaLDW1FKG+DoNfNCdrAsDO7zSSwg5OXbznYuHnoZxbquBNzzEyNJGS7JJ4LgdDYpFDQP7inUQMwOqw60nJuWqaMSMSO57ZjXTFs8HXD7opU/gN6fgdqIbYUifhxiwfkxc8K1EXYaTih6MsPzEHfQJno5A0VaKVHUs7WCMvP17ad1VMAm1irBbLHhSaAJ3I89JgdIXj5zmn34vHyypd2c7z1/DYqgBdPMYroXoCq94z3OrYTTKoECm7a00zU+yomhTCmGmP2xK8hGhAKivXYkyBnigDFoVJDVKft/sRHvzbz+pUKTmFVpAg3jHCotpH2plwqva6mDWNGSJ0B/LPwMxcShdAPun1KQQI4xBWoYVE3HHD8P7/f3W7v1N160G7nnxx4DQ8hYHe/4A8gi+l1srKd4pfJqyhIT669V8sAa4vVBIHQAsmpjvg5k9TXHFVrU0j5N91tzVaH34zH+BA30SgC+JF/LbNUtEdkIypnn/6YJMjQUJA7dLqkp4w9yF/BQ9Wy4hVx3HFMVHvWRl6Dta7UcMstumYnpkWhRLypgxG23w+XVyWiv8X0kbHC46ddfWRehUeDnTiat5J5U6/0hRumBt4mReGe3qRQSQ5U9MorOc92NNkTU4RTzvv+eMPDU65GZnKY+to2PJ2zzULxlbTUajkAKRbdJOUpN7xAnp6UijDsqc8f5gwAJrKKc4n8CEvKzegoOXOsiynHBR89gVmUaWzXxgehkHvxZ2aEiIl9cSGvcHcNgl2tYNOr2LajFeHY2/ZZPZ7kYj0Zu3bkT+tjHPx6jvoTViaFGbMYolsN1D5KCM4cNty3Dwkl2lzTlZWeF1gy1COkNXEehb4AJfRoC33HdLUFK7RVSZLbthrwRWPefMrvs7mmGZio/imexKaO83PTj5LIhoTivG9zFyCXk6/0WGFcZOc4TZgFosxdwGZiepd6A++CGbScVz2rUTB7EPQv80p5lPUgr168akEDRM7yYFs4/l9gLwxEHaqjvY1ttJuPFhOSZ5nc6zuvs9HwfdNotNz61Z1ScJKBfEN8wirsC4ePEB1vB3o6bdxSXPN/EO3MqRE+RZSJ7wF2ea7zMuxbAgD+PMVvsFr4eu3LK7R3i+d23VV2to4vDJzFq4VfL8euE6V/x0pOsI6HiH+58ZZBcJIDGV3RjfJRTW2iAMQJDXhzYjIH7sFxMB0DPZkigOEAhZdTks1hTuWAQx88wqFnz63ZhJG37lCk3m6Vmt7oMEP/6J7pDUwLObwIDdlt04xUKA9ew2X3HHrSvNCYlPABXUiTWoNAhgRMgBRvJUDTAABI2J8QQk+Sc1618XonfG1hubOEXhhvoqm50cx/pIkDRM3nr6xvpW/ftoj2A0FHH6FPfcalq+rKK96Zml9lNutyhdzXgsBLql1DshaMI2vuWQ1HdSWo/2K3qNuowVepGH7RJvBedkoNWD9CczEoEOOpmTeY0rKbqWeQGpv3DaN49EQ4TZBJ9yaqg1CukZUZ1xd3rOdbqxuEEewFtSQOOLQnEeY3M04o6deCo9D8a3bm2FQTpRl77fKzWUQIctBSucGZUdwNnrSALxZlg1Vrpkd1G8tkNOsGuGNOb0/F8j39cRY8gB8mTTi5QITQvhz9q9xo3gahPgVRQb8n2LdylSQ8BTH0lzmGWvtlXQ0ZV15wgND+9ItB6VZ8TQ5LWMZI63fjez4EizkEuf5f8ONN0QKmyDAsd5qBP+wq0TnqNred/s6Qub2rXC/BeKUsDNNtfSG2SzWFA3WhyWeKVBJgoKgQTchiyJdEHDb9MODkA3mj75luy5nd6TW9C8HbEoVRI39onfLmIeyX9hZmQxOzcDeaz+ueNP5ZbbSbUAtM3szJ9PGp4wdKxbw31n7S6Tnm0A0Q9yAf2AocbUlPR4qBa16BLeRM0DcKvmt4QdnKePE8pFTolxvpxlqbfOxH0KTE8G4/SAkuoAaKHnfHpNdhtMy8fqO2MxfSeGYajM/Zl/M9ctu4vZIG+JO74M8zReAeoLUEmaYl1qnRe7yAQfpkIK4VwsG3+BhrurLK0mgS41ErCEgHSg38FPYAmo53mReIJg7E7JHOgxaGDtuhlwISzJs2TFx6hFloDef1HHeilgZx4aKKtBtaIek61BaxDMieZV1t1+4h4pzqZHfdoqApXJ747H51tjFTst+obsVe4f0Kis5J5DAYKsjUll/MYAR1XqwvbHfqyLAJXHK/it7zneeGsC1ng7RP3nJe436lgU7uJAg5BZsfOKPoP3xMVJWhNZcUV7gEXTVm8CYcvF6/4x2l5TZFHRzDHG0IJVuLm3TQ9OJYW5GpPORAdvFtxuL5sTGlPGuFk09QrJc8ECDQqINwHdEAu6LXKBkzI2nDhyG3anW3uCNjdKlNZe10fmk0n8+UdMqtU8tN5IyX7iPbSIIHBhEThOP7O1w2crhYesuFf+f6I9DU0tgoxCoEcwzPkgtqwOuziyvK+XvLxnwYmGp797+P2zjbwOHpaqEcfGTtBHkZOQM5iLY3NjGBr0IgLD0s7G/oNzRxzTOoWCyxVPn8tz5sNAdm0Ow7uLJeLsMTbHCg54Pu6Sg+ELO1AXPvg369ijZHLn3F+cAGUUbzvl4UqBAeUoaGFiC0gPAaCVeZscTg8Dk3u34tQbEpRg4DmxuCtVJPLenuiG2p9+Nz+zNaNB5pizGoCmWtOlHHDhkzNTgxY4mEZeljIG7q0nTA3qEM9tBjJS20PqPEZKWzNxuBEfPQ5KS6Rwvui1cPqpq1LFTl1Cndor2ZrdwVh60+Qu6khgt0lJFJs0frHWPHjoekZyVcV7d3eGbyjMhRLU6Uw1R8hNofF4xfhslKkIP11yOi1j8ekbZx+mwud4xqoG3AM2N6NzMDWwPiQN8N0+SWljeqfiBbVDbg/tlLp+AgOtROqcHVn/XcMSJlg22DJC/T/99KtVsuNDIzTs1HDoqld9WuoXqEgenRnjIfT1qYkMjTgoSlgb/rPyvmecOVMo07W3pZh6+IuGzZtDt+nGE8DeH7uJfKdbCxssbus4Rq2TVRcYMHQEOZqKaC9H5Oal9XL0flQ3RT4qOi8OHJYfS9Uciq3r+ENDYVYeszcDXECmwFEN5ahYo+7irrUvEV4MHc7ayWfQp78thulGH9DTav9v5TfSJVpQaRHzG2+dO3oOfo02tIQNmWZ1A7dR17ySlhH7i0iGbRvIrjQRigZ0GCPuOYCSxDW5139vDt9YA8jcf6hpq/iUxBkxgXAngZusofli7tuDOwE5tgX9NVXJOcw07dIdWXQWqlQ91AILtGfl38NKux0Zg+bLKjvkLd4k6NdvAT1zoHJj6t2C5iLQFLkFLrGIWtNrPQyJfjsWhbbjSc3WpGIlx1obbZ82J6T3fdcUSgtzBKi5P5LtFqMQJOMqh8WxyiI8YcpfBLt9OF+7YMX0j1v46QCU+WHKJ114IjSwvJrr05WNoOdijLzpdcFB4zfmOkUoY41MbHl4uVJ3yOTXk1c9+HghUIKbagBvy5o19XzzUEa+wLIlHT9VMH2TDMjLkA9inF4shshTEk6B6MqbxrX6ewu+glgrdhYzeSvCbW0J2M4vmjGP6W7VjhR6FrcCTREMgH9XIlNkqMfWRnjQZr87DJO3TQ/YTpCRKZ6Q/Qg578kkmlHlJtkJayopIXUn+xKK2o5yUlpIuhMVoV9h+rp+AaCupTPeuZFtHsLouXjMKXfG0U/VT08Kax5IosRPqFu/0QBhvVlt9o99ommhhusMZzoj4050uAO3vW51U8lMYPA6UHd/uHknuEwNSYLZXwxtAPqFi7ufqBjlTlFIA1R13aDpZVPTpZT3PUXDPJ3K1YrgrLTTSpY13+LtR6IRk4GCP04DbyGaxTicQ6yQ+Tosi0JnPBtQHtBToDLhWpsH8c7QgnCqT0to6nh6bSRI+zSb4MjnEdwLbhgAxBi5N+UpGBRj8DXkoNJeOhIRtctvU2Ky7etTsn20PM/jvF5Pn0zcJj2Kz9m8sutsKyMpEzOvxe8ed7wmMU/qb09CSIa861uyXIFrG3id2QM2tVHlENAGEuvF016ORu1UNh4HG52CGFiRPNLQS+n+yEbjA77hGBwPkWqP1ARv/99srZrXD/bNmw2Z/k6H6NRpsOQjhvbgFrYw/Pe+3u74yL3BRSq5dx6zHbB0NibENCG+/qwjX140Z05aBYun22xHaaU3AAl10G52vrw0M5lFiIouai5JVslsHwE5vEz34UODd54QQ1D56OuJCam4bPK8uGXZ2IX5byzGkaSqnISyGTZ/BQnBDaBOIMxmtq6M4uCnJo1PgXmkU7CQ3nvC+yrWQz1WRTQIu7u1WSBbpmVNpbTzUZ0I9Yzw1iTADWYzxwRERtl0zn+FPixFrGgtN7oRR7R6kqlk0nqWuOCMRzyD3SPUF705E83gIITn8qOHqL6N1iNTbd/iJd4i2kBhbZqBD3Yn1c9NUbchzgeGejbH3k5VHfdoafbJRcdFKqij6Lv0h/TXTsfBpU51OF2Oo9aq2nIiV8sCPLpERaTVFz/JW9ecFzswud0uUtlHDVS6irobLU/j2nlBUFepYY7UrtROLaV3uvNe/E71gxIFHxVawBJD7UkDi4pfiUfMrleEi+yfGzNBmXTlHXxCZtPmpxZ2rC9zWkeMJxcNucSRwOe3UX9xeYbd9jbxBhZMvhDRNvrVmF+Cbd/676eQwOJ067c39EGpmvbuiePvPAwsy4PilGNz2dCnrG1gLPJoRVHaQBaSZlp27Z5dVr0nGz4gmqxIANmdoTTzR7lc++734ZgThj1uFvQedHrT/3Siz6LBFR7z4HAK4yY+q2jql4R34rr0r+ovFFuLGuEEmyr/v7FMUyds004D3mKUeefG1iPHsgpP/90nYX3vC9RKedAsnxFBnpDCwrhdeG2RU0l8xBKkwDTCnOmawwY6PRUdvCCdheuZJk6E5CyoHsD7qKVS8wKGTvrqkgyiurWDLbICPRakcYLIsNQiWap6b3k9A4Q4OKCKVYmnCYv+gF1+2scDGvG6eszEEinMoZ+GD/+uOPQoGgk+/p79dHVvIKEV+diAkKxhGgGCeLIYwVqmK1Zt7Da8+tMCJTVaF/AoR20CqKD6PTk6E7kw1UOkx5xY9w6XP76zOu+7VHnljtBxmLhbtegLEb2Ngn3hnsz7vvChbDUWwP9WXnLpe5cHfRLV5GEYGHLC7pi01gIAPLmybSYSwM6CiTsETXxXehLnRQNTZfEoUhnMIHUMkC+qAFvK2XMgj9YPtdCdbEFnXvGJRLiZz+sxnW+gZBpxdpfoj2sAx8luFU0BoAWd/JeUkd3rhDUnkfuQ4NupAnaohYLmkaLSEr50Ap77ZaM7h4oAWSJByjh8DBzJ/iPihfUt22vE6mBoKYHzeGq9qlncLf2VgrRVD1xeHNm7ZUFAj6yjXpsVZQdpjMVqgA2TkhM3mCYZN1D8f2GncrJUxulJVzCyV+Zv5iHaY+dxsKLybIa+tpsXHQc3dhX2vriEtqve0Omwmshw+T34cIdeLeb+E7KlansVqy2JcHNmUg2UD/cz7cZUDzLCSlSU7Z2zTP6x0WvIqZAJo4IvWSZ54FrpYIPbp536AHdeUqdiHZVkLKm3nbe5HNfyQu6kqJYgVBIuBNKwtawTxGiVScYfmLFetdBAs+I6dudTngL99Ec0nZTHE4aKmHYN6iSnlzyTMyvRZeofpSCLkyCX+XS54ccy+yHTOo9LK5rbSvE9oc7HRtW4McCCk2bpbDR8zw+OrKYQro85mKAAo/pV1LIEVp89+apq/xXM71xWGvo+BAfNuPB3fU7qeGmpddV7V6Dp8tsYDon/ZLF+o9LhWJY0qEPnliktN1WlyhFOeGfY+jFXiQdOccLkNQH/f3xwV5b3z+FXlzD+Bd9BHZpP8X0P27Y+j9ZQFu78dbdxVxRV69v1gHA88yhogWGMxc4jVqSJVeM+Zd/HkGFk0f/7NHgIJP3rgCEdtnar9uQhmtUA6ucTeBjLhIJyoQGCT6732ucChnz8E/2K6j5KpEA37Uk1GVxOtsV6L1GgnOTZ8zmbXeD0craS/xb2t17Xdb6nSRpciU2WP9uqGvz7drVIJHtJFtd5QudY9n28h9ek68pksVD2GvCnN4cos+McNLbPen9HktnS/tSRXTq7bjjVEBWJVVCfuDTtV7b5aUYBExcUtdDaQIJazewPmWvxFxuMky01zn/2pCCQ5tvrJJ4ebqmjPCBqxSKlXnqMNi6ZH5Oflrls3O+P8RiV1LLuf+iDwjTXBj32rrxV15INQ38d4aq8oE2buSipRWBd7HrAENl2QgqYtmlsK4q9mU3F5JHMCWoTT1/OaPt9OzGxhRTMHT16urtcN2xFNMBonLoZjwSLXOcmOp6X5kANzwxGJc3++lOQjFH0+3q+fgOC6v5QHCUcmc+gpHR6YTsyfDc5Lx4l3XwEzvZcHTg7AK/ZyK/KTFhGZAEcX+OSFCKYT7Ey50K9aDT/o2/3vKsSfASGMuzcJkZYnLXaaPwcr7gOtxN2Vn0nZJgFycYXYqdaezP4vJ0Pik3vitj1KYR/0vcR8GNSrPdDlZo6CMteYH0M5LUyHA/s2C6yGs2rEfw0MEshVzl9MmPHNyf+s8we6gwYv+qOj8ao+kL57+n/2wjx/2kZtwK+FpcNnrdP++2HXAbb8So2gGkGiH1nxE34R8I4zX9oO+F5A/BU7csU2FjqEbVFF1xhkNWJ7kWjZMQ3lCXjSbJIeCTDgDtOHZ+fiKBKZBxFPse4mxXRNNj1S1kZQ36n4e0bph4rlhI90sD6+ZEiB1ByZvk9z29P+NOQ5UEDuPBEKwlE6HEMMMLQUcDOBEagA1vN0fAkH3t6Ta8ljbcaUz4IvXDry0Q5SCGZ/cZlUvw/fqmXQLeViYigedmcHfaaE0ETDpBkeY1N4q8CN0PwauIcmW07jJso+MCmp/GgmeuJ3qLa//JZqPL/h9Bo63WRA7VWC22p9hXhNWnQAMafIb03vumAEh7zg9k+PJdAzAlZyIdIixKqs+F4Lqqj1VuD1nq1hIMlpGBBbks3MCafzDEj5cz+lx1P15c/35hDLshjtS0O7Q6Hh+Tk3MtzpH7CKRij+KmtV2hkch39XXa+EqSJ13ouuASq7vp3+2tr63tu6ziK5N9ey8qyfXRqUq+/XisOxO9jbCel1kUJxx5x5jX7IFrde/qPPHyQ/JUtgCVhALxZX2xcTV6qXGd7wPjvmnU1TiJQUUgXmg7nWTD5bAKUoqRWCkwPZQ2CKKGM5AFmgKotCFxN53SfP1BoQwd/rVwMk0tlI9+piv2um0nKftwc4J8weXk7POKJ9KtsJuQLoh7xbQr7Hx57X5EfzcfNNjbbUVgBWnSz+ULjMyOWlmSyEeyoi7r1Sf4z7VLhMMx8HUwB2ICrvKX1tM8d7vjFMDoJomMT6e0A9V95I5bhhnjNXK6Mhp6kSTimcvuGv5T8snjADa2WH4BWtQDvoQ+gY/rTgbwP1bKKomjrIQwXteKX7sQpN5ztZk1+EYseBoIov4sdfX1aE7I3aSIIifZyUcriIWoiTM9au7YHubw8dutav9PLCj7EncmBizwr+TrnTf8CKEPa8a90Q2JAji8maay2C9CV+xC5ikMlWv0/YGPTkahFnlSE+T2kvBvnd4nSiqynw+oZQg2MjRXxhHVT3S86XMv+1wa98HblUQ31kcduQmYz3jez5S9SrwH+pGz1Zp2ivZXpMR4qiJc9JsL5HDkb/IGthtvUCe37V+gq//D8o/AjDKwuVncHleRHGAM8RrBDB8T2xmRkq5vcBNGpHK38OSgFYSx7WRC/w90/DxGtE6Tzczhf0zdX711+chMJAr0P/A8lfj0DCYZBPm5jNtdRkNVLI6I4klHqqneXI5MwfKnzFWvISK7m2g5FgqdP8m1uLJ/QFtd5YV4guWSSrceBzrB2NEk0nDezUaJST6qVc0XHMkHHOyE8fBIq/L5zlQGpv/ws3M9m5gHhNM4y+F2S4GfSiPdyTuhGUK3IJ0RymVyyw4u7lzJqx362Vg/uuVqcdJo9e6d88r4oV3oGCI9s3DIVyKxxKgBSMvdKGHcdgU1sWa3polU0eQhCdMq5IBd/2ZsG1XlMIBbRs9980d0H9bApqySXXx5NcoB7gngFKKyBPLNDItcg/zUv5uqZbeOFy3E1rPURccFRUPO/VatycKTn1NRYbkspjEqVOs4dElYbkQ1HDHLcFDR7GU9tEaXwb1UCN6M3MFkI1KsO1/dkwIbmVcz2/8U/VYaXQpO6CALJrO99Yj+BW40VbmVps7Bq7FKeJlRBiLXrZjNmeGtMJAzp6XaGQaadjW/hky8MC3qEXkEnxuUMngflE6ejZCa9Hw0mBDYIvZfovrh2tFpLzVN3ZtbGDTsCbYDZQiv7rUMByzAwl/xBmPMZxxIhHEZ7DG9yjLMbiXMAgEmiUZ3BxWeYXsBl9oLVgf0MASK7ptEloJAfzY4cS48J9zozMKy2cMcwMDhdKFR7r0w83XYa+2GoBeX7w4K2wvO2lj+qEeHMeJk3SwhKgJlAQvC/2b+dNtZpZn75JBONRinmogRJEhOldGmFTPaqVDknOLiRwde04/h+iMunSpvXcbGgnf9ff0cltOT7UtefEx2chjyqXh3MjV7QzkPe3Ws+zUPYJHBP/JNFtW8o0fjVNj8lifhFsIys6jA+SzpO0nXCW3S0/D2stub8STDH6Qeg0hOF+7fiaUqK0g3ko5bjWT/FAbjiN0VQ9pORgfYIYnA16n6yRz24YGRPE03uGjYoQ3m71bi22AJHJe9DJ6Zng449tkJs7CJ0qGUpm64sEX79jNKc9pOSdlCXd/aZvIAUKzOcw8NWOT/MPl/AKKKrl9H9ttJm7waqlFl1cxHjoaTon5OcEd5c2AQJEmJtXnylciGv3sruwU/uxcWQ3VMZPxoqRlxPJU0o/EyT+LhzxXMUeYMSD0YpvIX4/Cwl3bKJRD3QLXsH+hSFF0mRD3i/a0XxNdh2lHYDZa3aJsiGLrztA+pPe/zueVskaeaUongIRfl9YtaU3mo1BOMYMijceDFTFE2xkvWuTP7aDO6qZkPLb2Bxix9BwXRIDYY2sQvD/i9DkKMnBkkXt4jJKTRtaFWTQ46uBvJ3+Rf7iGM7pIysbCcgH4NALzjnh7cmsmn4PPFUlYE2/kDiNpkXRS1a5XxiGrEKUlizMf1BANPV+5RI2iFMSZvdho3wirKdZrncxm1xhYTxRTc5Dov1QcIKOLND+WvSHM6mmyOCQYEQ7RNkoMRFRaI9quL8BpFHtxFnfn8DM7Az3pd7Rq36IpAygYvUUvRQ+L6NptLeQ9hRVa23dVrDNWeXvrtECa6eRLhhcf9oyMDbIPuBZv+X5J49Op49e9vCKAWugAzSofqKvlv/QJ9a1ts02GqCpUhgQHF43fWUPtlS46j69tK7xJltdniCFh2O5a9cCJaXS249lGxnBVUxuinfI1jpnm1eGkXpzzYrpTNoh8Ot9DdoXDB9t0Pn3VPEpYfjt0qaRnxw+VJ1QzSVXVpV3sALswu0XK3/cgTrWf+Rh/vI2O5kNV/5HwbDTA7Iu1tnZ2gNWaqeaAzgYWl+O5khiU9kryoOMANfctP04WJNsd4RLe5mSeOhiLeX2vf2/Gt0RIBa2v6yGvDffs9SMUphGyszS/QxGpSknl/2EWDsrlRsFrNeNuhV4u1loSN8I1uqXBy6tw+beN+XUf570birSEbfr3cU+XrBypraR4Mbvk0xhL8oIMcNIe3SKEKw1Lb5JKzgEsLyWYo/rmnIQKNFqIJTJpq3vPqJplejC2VWbhtcXQHThavHSeIrgwPOY7J2a5QC3grHNchzsZvO20QHweNlwhoBDE+qLpfXnd3KrlKMSoZgAINqv2/1Bx414wGKqpNK9JQmhlrgXjPhlwzGdtESLzHZnPh1npUx3SC9vFudZhyhpwLub7ErKmIbQdN01QTJwAl5yOP60abZzo367S/MoGnbTMa+VQ1z8GDNhE/ZdZPePUPZjk659cAmj2nyJmI/S5DLYqyS2D9M9vEttKhewZba7d1Bl4fcCtPvqYXbr2G7Xw6NQ++J+r8DUqdw3x5M04rtJ4CH5D2js4E1sG8F8aAPw6dfkSJgCi8lWf/IjI5ayAPH2xc1i7zYHI2+1JRvPmhbNWIZew6QsguGoKL0A/7D80K4flzyehTRSOiULYrw/Fnamvh7mNIcZs3JkZPvdka+IFfyu6cvqj7D1NiUeL6wIh7Qhj4F84CDkORxQJaw/+bL+u8rloe0hzTZJSDz91aF37v+h8kTIvUkYSewaG69zCfHLfA7YkWpVGo2IEZv8egRp4fRxPRDCHOJaeWXyWkNbFsXxTlucZDMJdbopGUqBBAYEeBjt/GQsWs3cOHmrONcYk9GJq8/D8kC2THNC4J90a7EB1jS/DeeQp9IGRm2KF9HrLq9RnKKGTC5tAxMfLP82M4YQJDbnPYVr0FvNWTzn4W56Wewy+Bw8YjPHgN8N5VfbGwoPdv4/c2IcRCGBRHn3FmCW7lSZIQYOhB7aYkq4nxsrUGE7rrKjnow2c4LaUNdn41fFf7AKrtdCRAtIYHsKC+kVsugS69xduT9z3T+jHGTAKRwNYSg9kS0MZX+j/mZbrUG7QOwDKRkItpHayEkPqJS+FnT98wL7fROobie7ruIp2qucQdFiqxXWbMkgmHzJaEVWZbVzwsVAQY2oaxyBe0qP0Tn59eF8YOi9pih1TECv2GTq2X8CXDr5j/cBhrNOKav5i7OnDFhCAJkeWmcP+ZJDacxbDrwjVyVsJ8EADjPgoYPkR24iwIi7RzRijT33xPYZWINzD/WVGkZa4bmJOY3wIIkQY2TyGImAPwVZndZlZq95C7uE7Y63NoFnAS8V7tsFK1gQHDqtreDa12d/C1EgKmP/xGalXzmuIBVz2F9t8LMjvHFaOagmYHFMLQypNizPuOP0jXdUsVYfDXhyPwX82ks8pjt+XaWoyoY0ZXggaXmieCH+QduZmUMe7LZ1CYa8/JG9RWcYERugc74hus0Adf7Ripn4Q2FUmiZhu6MzHnBjOb874Tdh4G0HbjZLR8wVWvUiqVek0CY3MUOLPJNwZiFEWAyyMMAmN4ssuTgoNPzhtTwSqQxADjFA0ONXMLYB5ZWEjcLETqH52oSKUwqBLuPFEdnimTfGc4vSZFQCS4eFGTLgHel/AjfP/yeqDIhjJejFyuq+UcEiE5ZYJN66UkLfSyrf5v2CGnvhSf0t9HdNAkAwA03IBnupLedt4acMhyyWLH2C/LPbiWvQdLvOdqtinLOTzVgJ6l6KGWVVm2kbsSahYbHtKYUlMMxKF1quGoeFiazCeEFYyrzFqpRMbMWtckNHyuMoMa+Z8LiyPb/M9hIzyB4CuEKsiQ6XLJAc9J8noWykVBnw0Xl+zP2pR/0uax42FK/y+siAEFHXGEai7Kh6d5RWRs3Y71Gp2FjkvqggZSeeSEhBEpiPobOcYQS241llJBvFbWEZ+JqMmzq1CwtC3IQXJPWNmQOT1WGm3NKJQCFsIu155g0CbhKJ6RxXWC/JMTelbJbgJZlsSuo3aT6Nogg9x0mvwytad7QWg+45ybjikyjKd3eQqTD9ddIJZI3+zxZapm+Zc4PSSYeEfH3w12gCbmrsROXavS3z8YYBeBdO4hu5r4cYoaGjJSTTBfWwKxDl849ow1+PjgUknaK7Veeml9NAYJqkRK9hjYLltieb86vI4gJpWGa5dGza7e0+kcIp4WGejFAUDpAhd3o45VgqKJpmhCT5ehSE/Hki+ND1JUd+n9pqY9YRh8O1aOf2lB3RmlSuZ7kk64jZKvo40RyJIT/XgBm7p/N2oeUl86n8sKIkXw5c8rAl/DYCEqXnPAPpg6Imp/ChE/3mLr5beutD1axrC84Mksj5+D8SF9uKAX/3i5+s+VChbCzNb5twgrxxSTPdRm/J9okRIyM2eQm3z8zt1TxK7jWqgrwR9ZdNAs9oqepnyJqWtxeKBRdK7FLB9/BVlt1Zgtq/J+xM99q7XWS0+Dn2lB3BQwlhsnFZCybxHDDaxhuw/E+uUvbIkB7xk0Qg4KQbyydXPBxAp0t8BIESHwwwSjONpW1RIvuvNokvDVh8xRy3X0dJcqTbB4mXR4Sih5jiso4p+uG6urOQb7iDUwrfBX3suTUhymo0YDbRnBL0Qcnc72lueJP1XpM0f6b/dbW3vDj8F7gQAMagQy6RkskwYaxRxzEeNyJ5JpSsiVxz5BJJ2NdGxaevGG+nBoqr1vF6GLu6cVix/uWx37jIkgqr5BhHhvmzyYSsj/VbrI3ctkM92mLgkC0gi2BQx9O8NvP1+2nYS9vn2F6AlIDIUiao4YJF2P6dzwY/qvvemtLZ3rXsil8/hig1NR7ycMk+cl3VAxTQgs0MFuyTXb7piA5qWOuhg9DCBp3rLt+xhuyYsRaOKQ2YKJ1NLxPvG9Dl5gb/JvraR5pxNW+YK4PhR1QGFgOVm/hatEguYYP4znd4DRNOpcT3wXPsNz0aPzEIExd7ziw93Ct/jvVHdC9R3baaE70plgyaJ0pDT++I7vDfar/59iVP/w6WCuQjJJOLwA==",
+"rc_enable":"y",
+"bg_snapshot_delay_ms":"500",
+"is_gen_204":"0"}
+
+[<section class="contents">
+<hgroup class="title type-00">
+<h1 id="titleValue">상장법인목록</h1>
+</hgroup>
+<form id="searchForm" method="post" name="searchForm" onsubmit="return false;">
+<input id="method" name="method" type="hidden" value=""/>
+<input id="pageIndex" name="pageIndex" type="hidden" value="1"/>
+<input id="currentPageSize" name="currentPageSize" type="hidden" value="15"/>
+<input id="comAbbrv" name="comAbbrv" type="hidden" value=""/>
+<input id="beginIndex" name="beginIndex" type="hidden" value=""/>
+<input id="orderMode" name="orderMode" type="hidden" value=""/>
+<input id="orderStat" name="orderStat" type="hidden" value=""/>
+<input id="isurCd" name="isurCd" type="hidden" value=""/><!-- 발행기관코드 -->
+<input id="repIsuSrtCd" name="repIsuSrtCd" type="hidden" value=""/><!-- 대표종목단축코드 -->
+<input id="searchCodeType" name="searchCodeType" type="hidden" value=""/> <!--number:종목코드 char:종목명-->
+<section class="search-group type-00">
+<div class="wrapper">
+<div class="form-search type-00 type-multi">
+<table summary="시장구분,회사명,업종,결산월,검색유형,지역">
+<caption>조회</caption>
+<colgroup>
+<col width="80"/>
+<col width="44%"/>
+<col width="70"/>
+<col width="*"/>
+</colgroup>
+<tbody>
+<tr class="first">
+<th scope="row"><label for="rAll">시장구분</label></th>
+<td>
+<input checked="checked" class="rad-00" id="rAll" name="marketType" title="전체" type="radio" value=""/> <label for="rAll">전체</label>
+<input class="rad-00" id="rWertpapier" name="marketType" title="유가증권" type="radio" value="stockMkt"/> <label for="rWertpapier">유가증권</label>
+<input class="rad-00" id="rKosdaq" name="marketType" title="코스닥" type="radio" value="kosdaqMkt"/> <label for="rKosdaq">코스닥</label>
+<input class="rad-00" id="rKonex" name="marketType" title="코넥스" type="radio" value="konexMkt"/> <label for="rKonex">코넥스</label>
+</td>
+<th scope="row"><label for="select_2_0">검색유형</label></th>
+<td>
+<select class="middle" id="searchType" name="searchType" style="width:235px;">
+<option selected="selected" value="13">상장법인</option>
+<option value="01">관리종목</option>
+<option value="05">불성실공시법인</option>
+<option value="07">자산2조법인</option>
+<option value="99">외국법인</option>
+<option value="191">코스닥 글로벌 세그먼트</option>
+<option value="QGG03P">(코스닥) 우량기업부</option>
+<option value="QGG04P">(코스닥) 벤처기업부</option>
+<option value="QGG05P">(코스닥) 중견기업부</option>
+<option value="QGG06P">(코스닥) 기술성장기업부</option>
+<option value="15">KTOP30</option>
+<option value="06">KOSPI200</option>
+<option value="16">KOSDAQ150</option>
+<option value="17">KRX300</option>
+</select>
+</td>
+</tr>
+<tr>
+<th scope="row"><label for="select_1_0">업종</label></th>
+<td>
+<select class="middle" id="industry" name="industry" style="width:290px;">
+<option value="">전체</option>
+<option value="01">농업, 임업 및 어업</option>
+<option value="02">광업</option>
+<option value="03">제조업</option>
+<option value="0310"> - 식료품 제조업</option>
+<option value="0311"> - 음료 제조업</option>
+<option value="0312"> - 담배 제조업</option>
+<option value="0313"> - 섬유제품 제조업; 의복제외</option>
+<option value="0314"> - 의복, 의복액세서리 및 모피제품 제조업</option>
+<option value="0315"> - 가죽, 가방 및 신발 제조업</option>
+<option value="0316"> - 목재 및 나무제품 제조업;가구제외</option>
+<option value="0317"> - 펄프, 종이 및 종이제품 제조업</option>
+<option value="0318"> - 인쇄 및 기록매체 복제업</option>
+<option value="0319"> - 코크스, 연탄 및 석유정제품 제조업</option>
+<option value="0320"> - 화학물질 및 화학제품 제조업;의약품 제외</option>
+<option value="0321"> - 의료용 물질 및 의약품 제조업</option>
+<option value="0322"> - 고무 및 플라스틱제품 제조업</option>
+<option value="0323"> - 비금속 광물제품 제조업</option>
+<option value="0324"> - 1차 금속 제조업</option>
+<option value="0325"> - 금속가공제품 제조업;기계 및 가구 제외</option>
+<option value="0326"> - 전자부품, 컴퓨터, 영상, 음향 및 통신장비 제조업</option>
+<option value="0327"> - 의료, 정밀, 광학기기 및 시계 제조업</option>
+<option value="0328"> - 전기장비 제조업</option>
+<option value="0329"> - 기타 기계 및 장비 제조업</option>
+<option value="0330"> - 자동차 및 트레일러 제조업</option>
+<option value="0331"> - 기타 운송장비 제조업</option>
+<option value="0332"> - 가구 제조업</option>
+<option value="0333"> - 기타 제품 제조업</option>
+<option value="0334"> - 산업용 기계 및 장비 수리업</option>
+<option value="04">전기, 가스, 증기 및 공기조절 공급업</option>
+<option value="05">수도, 하수 및 폐기물 처리, 원료 재생업</option>
+<option value="06">건설업</option>
+<option value="07">도매 및 소매업</option>
+<option value="08">운수 및 창고업</option>
+<option value="09">숙박 및 음식점업</option>
+<option value="10">정보통신업</option>
+<option value="11">금융 및 보험업</option>
+<option value="12">부동산업</option>
+<option value="13">전문, 과학 및 기술 서비스업</option>
+<option value="14">사업시설 관리, 사업지원 및 임대 서비스업</option>
+<option value="15">공공행정, 국방 및 사회보장 행정</option>
+<option value="16">교육 서비스업</option>
+<option value="17">보건업 및 사회복지 서비스업</option>
+<option value="18">예술, 스포츠 및 여가관련 서비스업 </option>
+<option value="19">협회 및 단체, 수리 및 기타 개인 서비스업</option>
+<option value="20">가구 내 고용활동 및 달리 분류되지 않은 자가소비 생산활동</option>
+<option value="21">국제 및 외국기관</option>
+</select>
+</td>
+<th scope="row"><label for="select_1_1">결산월</label></th>
+<td>
+<select class="middle" id="fiscalYearEnd" name="fiscalYearEnd" style="width:235px;">
+<option value="all">전체</option>
+<option value="01">01월</option>
+<option value="02">02월</option>
+<option value="03">03월</option>
+<option value="04">04월</option>
+<option value="05">05월</option>
+<option value="06">06월</option>
+<option value="07">07월</option>
+<option value="08">08월</option>
+<option value="09">09월</option>
+<option value="10">10월</option>
+<option value="11">11월</option>
+<option value="12">12월</option>
+</select>
+</td>
+</tr>
+<tr>
+<th scope="row"><label for="AKCKwd">회사명</label></th>
+<td>
+<section class="auto_complete company">
+<div class="autoKey">
+<input autocomplete="off" class="txt middle" id="AKCKwd" name="comAbbrvTmp" onblur="chkValidChar(this);" type="text"/>
+<div class="tselect">
+<img alt="자동완성 열기" class="autoc_open" id="AKCArrow" src="../images/common/icn_autoc_open.gif"/>
+<div class="AKCDiv" id="AKCDiv" style="display:none;">
+<iframe frameborder="0" id="AKCIfrm" name="AKCIfrm" scrolling="no" src="../common/akc.html" style="height: 130px;" title="자동완성"></iframe>
+</div>
+</div>
+</div>
+<a class="btn-sprite type-01 vmiddle btn-company" href="#searchComp" onclick="fnFindCorpName2(); return false;" title="회사명 찾기"><span>찾기</span></a>
+<div class="clear"></div>
+</section>
+</td>
+<th scope="row"><label for="select_2_1">지역</label></th>
+<td>
+<select class="middle" id="location" name="location" style="width:235px;">
+<option value="all">전체</option>
+<option value="01">강원도</option>
+<option value="02">경기도</option>
+<option value="03">경상남도</option>
+<option value="04">경상북도</option>
+<option value="05">광주광역시</option>
+<option value="06">대구광역시</option>
+<option value="07">대전광역시</option>
+<option value="08">부산광역시</option>
+<option value="09">서울특별시</option>
+<option value="10">세종특별자치시</option>
+<option value="11">울산광역시</option>
+<option value="12">인천광역시</option>
+<option value="13">전라남도</option>
+<option value="14">전라북도</option>
+<option value="15">제주특별자치도</option>
+<option value="16">충청남도</option>
+<option value="17">충청북도</option>
+<option value="18">외국법인</option>
+</select>
+</td>
+</tr>
+</tbody>
+</table>
+<ul class="btn-set char-group type-han">
+<li><a class="ord-00" href="#" id="btnType" onclick="fnBtnType('A', '0'); return false;" title="ㄱ"><span>ㄱ</span></a></li>
+<li><a class="ord-01" href="#" id="btnType" onclick="fnBtnType('B', '1'); return false;" title="ㄴ"><span>ㄴ</span></a></li>
+<li><a class="ord-02" href="#" id="btnType" onclick="fnBtnType('C', '2'); return false;" title="ㄷ"><span>ㄷ</span></a></li>
+<li><a class="ord-03" href="#" id="btnType" onclick="fnBtnType('D', '3'); return false;" title="ㄹ"><span>ㄹ</span></a></li>
+<li><a class="ord-04" href="#" id="btnType" onclick="fnBtnType('E', '4'); return false;" title="ㅁ"><span>ㅁ</span></a></li>
+<li><a class="ord-05" href="#" id="btnType" onclick="fnBtnType('F', '5'); return false;" title="ㅂ"><span>ㅂ</span></a></li>
+<li><a class="ord-06" href="#" id="btnType" onclick="fnBtnType('G', '6'); return false;" title="ㅅ"><span>ㅅ</span></a></li>
+<li><a class="ord-07" href="#" id="btnType" onclick="fnBtnType('H', '7'); return false;" title="ㅇ"><span>ㅇ</span></a></li>
+<li><a class="ord-08" href="#" id="btnType" onclick="fnBtnType('I', '8'); return false;" title="ㅈ"><span>ㅈ</span></a></li>
+<li><a class="ord-09" href="#" id="btnType" onclick="fnBtnType('J', '9'); return false;" title="ㅊ"><span>ㅊ</span></a></li>
+<li><a class="ord-10" href="#" id="btnType" onclick="fnBtnType('K', '10'); return false;" title="ㅋ"><span>ㅋ</span></a></li>
+<li><a class="ord-11" href="#" id="btnType" onclick="fnBtnType('L', '11'); return false;" title="ㅌ"><span>ㅌ</span></a></li>
+<li><a class="ord-12" href="#" id="btnType" onclick="fnBtnType('M', '12'); return false;" title="ㅍ"><span>ㅍ</span></a></li>
+<li><a class="ord-13" href="#" id="btnType" onclick="fnBtnType('N', '13'); return false;" title="ㅎ"><span>ㅎ</span></a></li>
+<li><a class="ord-14" href="#" id="btnType" onclick="fnBtnType('AZ', '14'); return false;" title="A-Z"><span>A-Z</span></a></li>
+<li><a class="ord-15" href="#" id="btnType" onclick="fnBtnType('ETC', '15'); return false;" title="기타"><span>기타</span></a></li>
+</ul>
+</div>
+<div class="clear"></div>
+<div class="btn-group type-bt">
+<a class="btn-sprite type-00 vmiddle search-btn" href="#" onclick="fnSearchWithoutIndex(); return false;" title="검색"><span>검색</span></a>
+<a class="btn-sprite type-00 vmiddle xls-btn" href="#" onclick="fnDownload(); return false;" title="EXCEL"><span>EXCEL</span></a>
+</div>
+</div>
+</section>
+</form>
+<article class="pcontents" id="main-contents">
+</article>
+<script type="text/JavaScript">
+document.onkeypress = function(e){
+	var result = "";
+	if(typeof(e)!='undefined'){
+		result = e.which;
+	}else{
+		result = event.keyCode;
+	}
+	keyEvent(result);
+}
+
+function keyEvent(e){
+	if(document.all){//IE
+		if(window.event.keyCode==13){
+			fnSearchWithoutIndex();
+		}
+	}else{
+		if(e==13){
+			fnSearchWithoutIndex();
+		}
+	}
+}
+
+
+$(document).ready(function(){
+	fnInit();
+});
+
+
+function fnInit(){
+	fnOrder("3", "D");
+}
+/*
+*
+*법인명, 종목코드, 일자, 적용구분의 order by 조건
+*/
+function fnOrder(mode, stat){
+	$("#searchForm > #orderMode").val(mode);
+	$("#searchForm > #orderStat").val(stat);
+	$("#searchForm > #pageIndex").val("1");
+
+	fnSearch();
+}
+
+function fnSearch1() {
+	$("#searchForm > #pageIndex").val("1");
+	$("#searchForm > #currentPageSize").val($(document).find("select[id=currentPageSize]").val());
+	fnSearch();
+}
+
+function fnSearchWithoutIndex(){
+	$("#searchForm > #beginIndex").val("");
+	fnClearBtnType();
+	fnInit();
+}
+
+function fnClearBtnType(){
+	$(document).find("a[id=btnType]").each(function(){
+		if($(this).hasClass("active")) {
+			$(this).removeClass("active");
+		}	
+	});
+}
+
+function fnSetCorpName(str){
+	$("#searchForm > #comAbbrv").val(encodeURI(str));
+}
+
+function fnClearCorpName(){
+	$("#searchForm > #comAbbrv").val("");
+	$("#searchForm").find("input:text[name=comAbbrvTmp]").val("");
+}
+
+function fnSearch(){
+    fnSetCorpName($("#searchForm").find("input:text[name=comAbbrvTmp]").val());
+	
+    if($(document).find("select[id=currentPageSize]").val() != undefined) {
+    	$("#searchForm > #currentPageSize").val($(document).find("select[id=currentPageSize]").val());
+    }
+	$("#searchForm > #method").val("searchCorpList");
+	$("#searchForm").ajaxSubmit({
+		  ajaxUrl : '/corpgeneral/corpList.do'
+		, ajaxCallBack: fnSearchCallBack
+	});
+}
+
+function fnSearchCallBack(data){
+	$("#main-contents").empty().append(data);
+	$("tr:odd").addClass("active");
+	
+	fnLegendTooltip();
+}
+
+function fnDownload(){
+	$("#searchForm").attr('onsubmit', '');
+	$("#searchForm > #currentPageSize").val("3000");
+	$("#searchForm > #pageIndex").val("1");	
+	$("#searchForm > #method").val("download");
+	$("#searchForm").attr('action', '/corpgeneral/corpList.do').submit();
+	$("#searchForm").attr('onsubmit', 'return false;');
+}
+
+/** 법인명찾기 팝업의 자바스크립트에서 호출하는 Callback 함수 */
+function setCorpInfo(isurCd, kisComCd, repIsuSrtCd, comNm, comAbbrv, isurSymbl, fssUnqNo){
+
+    var  str = "";
+            str += "isurCd : " + isurCd + "\n";
+            str += "kisComCd : " + kisComCd + "\n";
+            str += "repIsuSrtCd : " + repIsuSrtCd + "\n";
+            str += "comNm : " + comNm + "\n";
+            str += "comAbbrv : " + comAbbrv + "\n";
+            str += "isurSymbl : " + isurSymbl + "\n";
+            str += "fssUnqNo : " + fssUnqNo + "\n";
+    //alert(str);
+
+    $("#searchForm").find("input:text[name=comAbbrvTmp]").val(comAbbrv);	//법인명
+    $("#searchForm > #repIsuSrtCd").val("A"+repIsuSrtCd);					//법인코드
+    $("#searchForm > #searchCodeType").val("char");							//법인코드
+}
+
+function fnBtnType(type, idx){
+
+	fnClearBtnType();
+	fnClearCorpName();
+	
+	$("#searchForm > #pageIndex").val("1");
+	$("#searchForm > #isurCd").val("");
+	$("#searchForm > #repIsuSrtCd").val("");
+	$("#searchForm > #beginIndex").val(type);
+	
+	$(document).find("a[id=btnType]").each(function(index){
+		if(idx == index) {
+			if(!$(this).hasClass("active")) {
+				$(this).addClass("active");
+			}
+		}
+	});
+	
+	fnInit();
+}
+
+</script>
+</section>, <aside class="contents">
+<h3><span class="">상장법인상세정보</span></h3>
+<ul>
+<li><a class="" href="/corpdetail/totalinfo.do?method=loadInitPage">종합정보</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/listedIssueStatus.do?method=loadInitPage">상장종목현황</a><div class="dash"></div></li>
+<li><a class="active" href="/corpgeneral/corpList.do?method=loadInitPage">상장법인목록</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/stockissuelist.do?method=loadInitPage">주식발행내역</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/companyGovernance.do?method=loadInitPage">기업지배구조</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/treasurystk.do?method=loadInitPage">자사주취득/처분</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/irschedule.do?method=searchIRScheduleMain&amp;gubun=iRScheduleCalendar">IR일정/IR자료실</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/companyAnalysisReport.do?method=listingForeignCompanyMain&amp;searchGubun=companyAnalysisReport">기업분석보고서</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/corpGroup.do?method=loadInitPage">기업집단</a><div class="dash"></div></li>
+<li><a class="" href="/disclosureinfo/dividendinfo.do?method=searchDividendInfoMain">배당정보</a><div class="dash"></div></li>
+<li><a class="" href="/compfinance/financialinfo.do?method=loadInitPage&amp;searchgubun=corporation">회사재무비교</a><div class="dash"></div></li>
+<li><a class="" href="/corpgeneral/excntDisclsCompany.do?method=loadInitPage">공시우수법인</a><div class="dash"></div></li>
+<li><a class="" href="/corpdetail/ventureFundInvest.do?method=corpListMain">벤처펀드투자기업(코)</a><div class="dash"></div></li>
+</ul>
+<form name="menuUrlFrm">
+<input name="menuUrl" type="hidden" value="/corpgeneral/corpList.do?method=loadInitPage"/>
+</form>
+</aside>]
+bs4.element.ResultSet

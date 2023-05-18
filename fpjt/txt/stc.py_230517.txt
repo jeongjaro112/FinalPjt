@@ -1,0 +1,70 @@
+import requests
+import pandas as pd
+import os
+import datetime
+from bs4 import BeautifulSoup
+
+print(f'\n\n########## 시   작 ##########\n\n')
+
+#url_stockCode = 'https://kind.krx.co.kr/corpgeneral/corpList.do?method=loadInitPage'
+
+url_stockCode = 'https://kind.krx.co.kr/corpgeneral/corpList.do'
+
+
+params_stockCode = {
+    'method':'download',
+    'pageIndex':1,
+    'currentPageSize':3000,
+    'comAbbrvTmp':'',
+    'beginIndex':'',
+    'orderMode':3,
+    'orderStat':'D',
+    'isurCd':'',
+    'replsuSrtCd':'',
+    'searchType':'',
+    'marketType':'',
+    'searchType':13,
+    'industry':'',
+    'fiscalYearEnc':'all',
+    'comAbbrvTmp':'',
+    'location':'all'
+}    
+
+# params_stockCode ={
+#     'method':'download',
+#     'searchType':'all',
+#     'fiscalYearEnd':'',
+#     'comAbbrvTmp':'',
+#     'location': 'all',
+#     'marketType':'ALL',
+#     'pageIndex':1,
+#     'pageSize': 3000
+# }
+
+headers ={
+    'user-agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Whale/3.20.182.14 Safari/537.36'
+}
+
+rs_stockCode = requests.post(url_stockCode, data=params_stockCode, headers=headers)
+
+# rs_stockCode = requests.post(url_stockCode, data=params_stockCode)
+
+if rs_stockCode.status_code != 200:
+    print(f'\n☞ status_stockCode Err :  {rs_stockCode.status_code}')
+else:
+    print(f'\n☞ successful requests & status_stockCode  :  {rs_stockCode.status_code}')
+    # soup_stock = BeautifulSoup(rs_stockCode.content, 'html.parser')
+    # html_stock = soup_stock('td')
+    # print(f'\n☞ html_stock: \n{html_stock}')
+    # for stock in html_stock:
+    #     stockCode = stock.text.strip()
+    #     print(stockCode)
+    df_code = pd.read_html(rs_stockCode.text)[0]
+    print(f'\n☞확인용출력 df_code.head(10): \n{df_code.head(10)}')  
+    file_path = os.path.join(os.getcwd(), 'fhs', 'test_3.csv')
+    df_code.to_csv(file_path, index=False)
+    print(f'\n\n########## 종   료 ##########\n\n')
+      
+     
+# url_stc = url_call.url
+# print(f'###확인용출력=> url_stc:  {url_stc}\n\n') 
