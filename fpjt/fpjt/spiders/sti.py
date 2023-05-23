@@ -14,12 +14,6 @@ class StiSpider(scrapy.Spider):
         stcd['종목코드'] = stcd['종목코드'].str.strip('""')
         for code in stcd['종목코드']:
             url=f'https://navercomp.wisereport.co.kr/v2/company/ajax/cF1001.aspx?cmp_cd={code}'
-            params_sti = {
-                'fin_typ': 0,
-                'freq_typ': 'A',
-                'encparam': 'Zm9VajB4SlZDdlRjWFljOXRqMm0zdz09',
-                'id': 'ZTRzQlVCd0'
-                }
             headers = {
                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Whale/3.20.182.14 Safari/537.36'
             }

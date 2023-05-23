@@ -2,7 +2,6 @@ import requests
 import pandas as pd
 import os
 import datetime
-from bs4 import BeautifulSoup
 
 print(f'\n\n########## 시   작 ##########\n\n')
 
