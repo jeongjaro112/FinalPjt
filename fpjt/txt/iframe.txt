@@ -1,0 +1,23 @@
+<script type="text/javascript">
+<!--
+jindo.$Fn(function() {
+	var itemAddLayer = new MyFinance.MyStock.ItemAddLayer(jindo.$$.getSingle('.ly_lstmove'), {
+		'LayerPosition': {
+			sPosition : "outside-bottom",
+			sAlign : "left",
+			nTop : 4,
+			nLeft : -96
+		}
+	});
+
+	jindo.$Fn(function(e) {
+		e.stopDefault();
+		itemAddLayer.open(['000100'], e.element);
+	}, this).attach(jindo.$$.getSingle('.snb_top1'), 'click');
+
+	
+}, this).attach(document, 'domready');
+//-->
+</script>
+
+<iframe id="coinfo_cp" title="종목분석 영역" src="https://navercomp.wisereport.co.kr/v2/company/c1010001.aspx?cmp_cd=000100" width="680" height="2500" marginheight="0" bottommargin="0" topmargin="0" scrolling="no" frameborder="0" style="height: 3934px;"></iframe>
