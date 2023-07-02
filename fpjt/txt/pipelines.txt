@@ -1,0 +1,38 @@
+import os
+import datetime
+from scrapy.exporters import CsvItemExporter
+from itemadapter import ItemAdapter
+
+class FpjtPipeline:
+    def __init__(self):
+        time_stamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
+        file_name_all = f'stockInfo_all_{time_stamp}.csv'
+        file_name_filtered = f'stockInfo_filtered_{time_stamp}.csv'
+        file_path_all = os.path.join(os.getcwd(), 'fhs', file_name_all)
+        file_path_filtered = os.path.join(os.getcwd(), 'fhs', file_name_filtered)
+        self.file_all = open(file_path_all, 'wb')
+        self.file_filtered = open(file_path_filtered, 'wb')
+        self.exporter_all = CsvItemExporter(self.file_all, encoding='utf-8')
+        self.exporter_filtered = CsvItemExporter(self.file_filtered, encoding='utf-8')
+        self.exporter_all.start_exporting()
+        self.exporter_filtered.start_exporting()
+    
+    def close_spider(self, spider):
+        self.exporter_all.finish_exporting()
+        self.exporter_filtered.finish_exporting()
+        self.file_all.close()
+        self.file_filtered.close()
+        
+    def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+        self.exporter_all.export_item(item)
+        if (
+            adapter.get('PER', 0) <= 20 and
+            adapter.get('PBR', 0) <= 2 and
+            adapter.get('배당수익율', 0) >= 2.0 and
+            adapter.get('EV_EBITDA', 0) < 5 and
+            adapter.get('부채비율', 0) <= 100 and
+            adapter.get('ROE', 0) >= 10
+        ):
+            self.exporter_filtered.export_item(item)
+        return item

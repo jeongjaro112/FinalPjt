@@ -1,0 +1,70 @@
+import pandas as pd
+import scrapy
+import os
+import glob
+from bs4 import BeautifulSoup
+from fpjt.items import FpjtItem
+
+class StiSpider(scrapy.Spider):
+    name = "sti"
+    
+    def start_requests(self):
+        file_path = os.path.join(os.getcwd(), 'fhs')
+        file_list = glob.blob(os.path.join(file_path, 'stockCode_*.csv'))
+        file_latest = max(file_list, key = os.path.getctime)
+        stcd = pd.read_csv(file_latest)
+        stcd['종목코드'] = stcd['종목코드'].str.strip('""')
+        for code in stcd['종목코드']:
+            url=f'https://navercomp.wisereport.co.kr/v2/company/c1010001.aspx?cmp_cd={code}'
+            headers = {
+                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
+            }
+            scr = scrapy.Request(url, callback=self.parse, meta={'code':code}, headers=headers)
+            yield scr
+            
+                            
+    def parse(self, rs):
+        code = rs.meta['code']
+        item = FpjtItem() 
+        item['종목명'] = rs.css('.name::text').get()
+        item['종목코드'] = code
+        item['종목코드'] = '"'+item['종목코드']+'"'
+        item['시장구분'] = rs.css('dl dt:nth-child(3)::text').get().split(':')[0].strip()
+        item['업종구분'] = rs.css('dl dt:nth-child(3)::text').get().split(':')[1].strip()
+        item['상세구분'] = rs.css('dl dt:nth-child(4)::text').get().split(':')[1].strip()
+        item['투자의견'] = rs.css('#pointerVal::text').get()
+        item['현재가'] = rs.css('#cTB11 > tbody > tr:nth-child(1) > td > strong::text').get()
+        item['PER'] = rs.css('#wrapper > div.fund.fl_le > table > tbody > tr:nth-child(1) > td:nth-child(2)::text').get()
+        item['PBR'] = rs.css('#wrapper > div.fund.fl_le > table > tbody > tr:nth-child(2) > td:nth-child(2)::text').get()
+        item['EV_EBITDA'] = rs.css('#wrapper > div.fund.fl_le > table > tbody > tr:nth-child(4) > td:nth-child(2)::text').get()
+
+#        yield item
+        # 크롤링 추가
+        
+        naver_url = f'https://finance.naver.com/item/main.naver?code={code}'
+        scr_naver = scrapy.Request(naver_url, callback=self.parse_naver, meta={'item': item})
+        yield scr_naver
+
+    def parse_naver(self, rs):
+        item = rs.meta['item']    
+        item['매출액'] = rs.css('#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(1) > td:nth-child(4)::text').get()
+        
+        np_1 = '#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(3) > td:nth-child(4)::text'
+        np_2 = '#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(3) > td:nth-child(4) > em::text' # CSS셀렉터가 #content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(3) > td:nth-child(4) > em 인 경우까지 포함
+        item['순이익'] = rs.css(np_1).get(default='').strip() or rs.css(np_2).get(default='').strip()
+        
+        npr_1 = '#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(5) > td:nth-child(4)::text'                      
+        npr_2 = '#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(5) > td:nth-child(4) > em::text'
+        item['순이익율'] = rs.css(npr_1).get(default='').strip() or rs.css(npr_2).get(default='').strip()     
+                                
+        r_1 = '#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(6) > td:nth-child(4)::text'
+        r_2 = '#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(6) > td:nth-child(4) > em::text'                       
+        item['ROE'] = rs.css(r_1).get(default='').strip() or rs.css(r_2).get(default='').strip()    
+                                        
+        item['배당수익율'] = rs.css('#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(15) > td:nth-child(4)::text').get()
+        item['부채비율'] = rs.css('#content > div.section.cop_analysis > div.sub_section > table > tbody > tr:nth-child(7) > td:nth-child(4)::text').get()      
+        
+  
+        yield item            
+ 
+

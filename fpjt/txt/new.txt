@@ -1,0 +1,24 @@
+import pandas as pd
+import os
+import datetime
+import glob
+
+file_path = os.path.join(os.getcwd())
+print(f'\n☞ 현재의경로: {file_path}\n')
+file_list = glob.glob(os.path.join(file_path, 'stockInfo_all_*.csv'))
+print(f'\n☞ file_list: {file_list}\n')
+file_latest = max(file_list, key = os.path.getctime)
+print(f'\n☞ file_latest: {file_latest}\n')
+df_sti = pd.read_csv(file_latest)
+df_sti
+
+df_sti['PER'] = pd.to_numeric(df_sti['PER'], errors='coerce')
+df_sti['PBR'] = pd.to_numeric(df_sti['PBR'], errors='coerce')
+df_sti['배당수익율'] = pd.to_numeric(df_sti['배당수익율'], errors='coerce')
+df_sti['EV_EBITDA'] = pd.to_numeric(df_sti['EV_EBITDA'], errors='coerce')
+df_sti['부채비율'] = pd.to_numeric(df_sti['부채비율'], errors='coerce')
+df_sti['ROE'] = pd.to_numeric(df_sti['ROE'], errors='coerce')
+
+condi_1 = (df_sti['PER'] <= 20) & (df_sti['PBR'] <= 2) & (df_sti['배당수익율'] >= 2) & (df_sti['EV_EBITDA'] < 5) & (df_sti['부채비율'] <= 100) & (df_sti['ROE'] >= 10)
+df_filtered_1 = df_sti.loc[condi_1]
+df_filtered_1
